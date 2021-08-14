@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:id="@+id/nav_gochat"
+        android:title="Chat page"
+        android:icon="@drawable/freeicon"
+        android:orderInCategory="10"
+        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+
+    <item android:id="@+id/nav_goweather"
+        android:title="Weather forecast"
+        android:icon="@drawable/freeicon"
+        android:orderInCategory="20"
+        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+
+    <item android:id="@+id/nav_gologin"
+        android:title="Go back to login"
+        android:icon="@drawable/freeicon"
+        android:orderInCategory="30"
+        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+
+
+</menu>

@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+
+
+
+    <EditText
+        android:id="@+id/text_message"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="left"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:layout_alignWithParentIfMissing="true"
+
+        android:text="Example application"
+        android:textSize="16sp" />
+
+
+
+
+
+</RelativeLayout>

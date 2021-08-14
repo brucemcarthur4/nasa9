@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">AndroidLabs</string>
+      <string name="title">Look at my GUI eh?!</string>
+      <string name="button">Click Here</string>
+      <string name="checkbox">Please check this out!</string>
+      <string name="switchbox">Switch on / off, sorry</string>
+      <string name="textbox">Type here aboot moose</string>
+      <string name="toast">Here\'s more information</string>
+      <string name="snackbar_off">The switch is now off</string>
+      <string name="snackbar_on">The switch is now on</string>
+      <string name="snackbar_undo">Undo</string>
+
+  <string name="emailTitle">Enter your email address eh.</string>
+  <string name="enterEmail">Type email here hoser.</string>
+  <string name="passwordTitle">Type your password eh.</string>
+  <string name="loginButton">Login eh</string>
+  <string name="enterEmailHint">Type email here</string>
+
+  <string name="profileProfile">Your profile eh.</string>
+  <string name="profileYourName">Your Name eh.</string>
+  <string name="profileEnterName">Enter your name here eh.</string>
+  <string name="profileYourEmail">Your Email eh</string>
+  <string name="profileYourPicture">Your Picture eh</string>
+
+  <!-- Profile Activity-->
+  <string name="goToolbar">Go to toolbar eh</string>
+  <string name="goToChat">Go to chat eh</string>
+  <string name="typeHere">Type here eh</string>
+  <string name="receiveButtonText">Receive eh</string>
+  <string name="sendButtonText">Send eh</string>
+  <string name="profile_weather_forecast_button">Weather Eh</string>
+
+
+  <string name="profileClickButton">Click the button above to take a picture eh.</string>
+
+  <!-- Weather Forecast Activity -->
+  <string name="weather_current_temp">Current Temperature: %1$s</string>
+  <string name="weather_max_temp">Max: %1$s</string>
+  <string name="weather_min_temp">Min: %1$s</string>
+  <string name="weather_uv_index">UV Index: %1$s</string>
+
+  <string name="open">Open</string>
+  <string name="close">Close</string>
+
+
+
+  </resources>

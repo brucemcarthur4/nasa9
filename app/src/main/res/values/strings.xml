@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">AndroidLabs</string>
+    <string name="title">Look at my GUI</string>
+    <string name="button">Click Here</string>
+    <string name="checkbox">Check this out!</string>
+    <string name="switchbox">Switch on / off</string>
+    <string name="textbox">Type here</string>
+    <string name="toast">Here\'s more information</string>
+    <string name="snackbar_off">The switch is now off</string>
+    <string name="snackbar_on">The switch is now on</string>
+    <string name="snackbar_undo">Undo</string>
+    <string name="emailTitle">Enter your email address USA.</string>
+    <string name="enterEmail">Type email here.</string>
+    <string name="passwordTitle">Type your password eh.</string>
+    <string name="loginButton">Login</string>
+    <string name="enterEmailHint">Type email here</string>
+
+    <string name="profileProfile">Your profile.</string>
+    <string name="profileYourName">Your Name.</string>
+    <string name="profileEnterName">Enter your name here.</string>
+    <string name="profileYourEmail">Your Email</string>
+    <string name="profileYourPicture">Your Picture</string>
+
+    <!-- Profile Activity-->
+    <string name="goToChat">Go to chat</string>
+    <string name="goToolbar">Go to toolbar</string>
+    <string name="typeHere">Type here</string>
+    <string name="receiveButtonText">Receive</string>
+    <string name="sendButtonText">Send</string>
+    <string name="profile_weather_forecast_button">Weather</string>
+
+    <string name="profileClickButton">Click the button above to take a picture.</string>
+
+    <!-- Weather Forecast Activity -->
+    <string name="weather_current_temp">Current Temperature: %1$s</string>
+    <string name="weather_max_temp">Max: %1$s</string>
+    <string name="weather_min_temp">Min: %1$s</string>
+    <string name="weather_uv_index">UV Index: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+
+</resources>

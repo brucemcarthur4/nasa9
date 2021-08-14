@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    tools:context=".ChatRoomActivity">
+
+    <ListView
+        android:id="@+id/theListView"
+        android:layout_width="300dp"
+        android:layout_weight="1"
+        android:layout_gravity="top"
+        android:transcriptMode="alwaysScroll"
+        android:layout_height="wrap_content">
+    </ListView>
+
+
+    <LinearLayout
+
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="6dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginVertical="6dp">
+
+
+        <Button
+
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/sendButtonText" />
+
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/typeHere"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/button_receive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/receiveButtonText" />
+    </LinearLayout>
+
+
+    <!-- The fragment will be loaded into this frame layout. The id is fragmentLocation -->
+    <!--    android:background="@color/colorAccent" -->
+    <FrameLayout
+        android:id="@+id/fragmentLocation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+     android:layout_toRightOf="@id/theListView"/>
+
+
+</RelativeLayout>
