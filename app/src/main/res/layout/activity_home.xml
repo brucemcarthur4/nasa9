@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/activity_test_toolbar"/>
+
+
+<!--
+    <TextView
+        android:id="@+id/profileProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_below="@id/toolbar"
+        android:text="@string/profileProfile"
+        android:textSize="25dp" />
+-->
+
+
+</RelativeLayout>

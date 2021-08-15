@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,14 +69,14 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
         switch(item.getItemId())
         {
             //what to do when the menu item is selected:
-            case R.id.item1:
-                message = "You clicked item 1";
+            case R.id.home:
+                message = "You clicked Home";
                 break;
-            case R.id.search_item:
-                message = "You clicked on the search";
+            case R.id.global:
+                message = "You clicked on Global";
                 break;
-            case R.id.options:
-                message = "You clicked on the overflow example";
+            case R.id.list:
+                message = "You clicked on List";
                 break;
             case R.id.mail:
                 message = "You clicked on mail";
@@ -96,23 +95,35 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
 
         switch(item.getItemId())
         {
-            case R.id.nav_gochat:
+            case R.id.list:
              //   message = "You clicked chatroom";
                 // Go to Chat section
                 Intent intent = new Intent(TestToolbar.this, ChatRoomActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.nav_goweather:
+            case R.id.global:
              //   message = "You clicked on the weather";
                 // Go to Chat section
-                Intent intent2 = new Intent(TestToolbar.this, WeatherForecast.class);
+                Intent intent2 = new Intent(TestToolbar.this, LatLong.class);
                 startActivity(intent2);
                 break;
-            case R.id.nav_gologin:
+            case R.id.home:
+                //   message = "You clicked on the weather";
+                // Go to Chat section
+                Intent intent3 = new Intent(TestToolbar.this, LatLong.class);
+                startActivity(intent3);
+                break;
+            case R.id.mail:
+                //   message = "You clicked on the weather";
+                // Go to Chat section
+                Intent intent4 = new Intent(TestToolbar.this, LatLong.class);
+                startActivity(intent4);
+                break;
+            case R.id.options:
              //   message = "You clicked on go login";
-                Intent intent3 = new Intent();
-                intent3.putExtra("data2", "500");
-                setResult(RESULT_OK, intent3);
+                Intent intent5 = new Intent();
+                intent5.putExtra("data2", "500");
+                setResult(RESULT_OK, intent5);
               //  finish();
               //  finish();
                 break;

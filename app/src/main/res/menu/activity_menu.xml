@@ -3,20 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item android:id="@+id/item1"
-        android:title="Item 1"
-        android:icon="@drawable/freeicon"
-        android:orderInCategory="100"
-        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+    <item android:id="@+id/global"
+        android:title="Lat/Long"
+        android:icon="@drawable/global"
+        android:orderInCategory="6"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home"
+        android:orderInCategory="5"
+        app:showAsAction="always"/>
 
 
-    <item android:id="@+id/search_item"
-        android:orderInCategory="50"
-        app:actionViewClass="android.widget.SearchView"
-        android:icon="@android:drawable/ic_search_category_default"
-        app:showAsAction="always|collapseActionView"
-        android:title="Search"/>    <!-- This uses showAsAction=always, so look at icon= parameter -->
 
+    <item android:id="@+id/list"
+        android:title="List"
+        android:icon="@drawable/list"
+        android:orderInCategory="300"
+        app:showAsAction="always"/>
 
     <item android:id="@+id/options"
         android:icon="@drawable/global"
@@ -24,9 +29,10 @@
         app:showAsAction="never"
         android:orderInCategory="400"/> <!-- This uses showAsAction=never, so look at title= parameter -->
 
+
     <item android:id="@+id/mail"
         android:icon="@drawable/mail"
-        android:orderInCategory="75"
+        android:orderInCategory="10"
         app:showAsAction="always"
-        android:title="Email showAsAction=always"/>
+        android:title="Contact"/>
 </menu>

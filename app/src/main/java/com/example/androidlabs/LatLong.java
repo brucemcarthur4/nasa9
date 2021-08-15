@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,17 +25,54 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import androidx.appcompat.widget.Toolbar;
 
-public class WeatherForecast extends AppCompatActivity {
+
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
+
+
+
+
+
+public class LatLong extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final String TEMP_URL = "https://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric";
     private static final String UV_URL = "https://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389";
     private static final String WEATHER_ICON_URL = "https://openweathermap.org/img/w/%s";
     private static XmlPullParser xpp;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weather_forecast);
+        setContentView(R.layout.activity_latlong);
+
+/////////////////////////////////////////////////////////
+
+        //For toolbar:
+        Toolbar tBar = findViewById(R.id.toolbar);
+        setSupportActionBar(tBar);
+
+
+        //For NavigationDrawer:
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, tBar,R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ////////////////////////////////////////
 
         // Start the progress bar
         ProgressBar bar = findViewById(R.id.progress_bar);
@@ -144,4 +182,115 @@ public class WeatherForecast extends AppCompatActivity {
             return getBaseContext().getFileStreamPath(fname).exists();
         }
     }
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_menu, menu);
+
+
+	    /* slide 15 material:
+	    MenuItem searchItem = menu.findItem(R.id.search_item);
+        SearchView sView = (SearchView)searchItem.getActionView();
+        sView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }  });
+
+	    */
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.home:
+                message = "You clicked Home";
+                break;
+            case R.id.global:
+                message = "You clicked on Global";
+                break;
+            case R.id.list:
+                message = "You clicked on List";
+                // Go to Chat section
+                Intent intent = new Intent(this, ChatRoomActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.mail:
+                message = "You clicked on mail";
+                break;
+        }
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        return true;
+    }
+
+
+    // Needed for the OnNavigationItemSelected interface:
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
+
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.list:
+                //   message = "You clicked chatroom";
+                // Go to Chat section
+                Intent intent = new Intent(this, ChatRoomActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.global:
+                //   message = "You clicked on the weather";
+                // Go to Chat section
+                Intent intent2 = new Intent(this, LatLong.class);
+                startActivity(intent2);
+                break;
+            case R.id.home:
+                //   message = "You clicked on the weather";
+                // Go to Chat section
+                Intent intent3 = new Intent(this, Home.class);
+                startActivity(intent3);
+                break;
+            case R.id.mail:
+                //   message = "You clicked on the weather";
+                // Go to Chat section
+              //  Intent intent4 = new Intent(this, Mail.class);
+              //  startActivity(intent4);
+                break;
+            case R.id.options:
+                //   message = "You clicked on go login";
+                Intent intent5 = new Intent();
+                intent5.putExtra("data2", "500");
+                setResult(RESULT_OK, intent5);
+                //  finish();
+                //  finish();
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        // Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_LONG).show();
+        return false;
+    }
+
+
+
+
+
+
 }

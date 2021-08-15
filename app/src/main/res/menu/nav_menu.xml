@@ -3,23 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item android:id="@+id/nav_gochat"
-        android:title="Chat page"
-        android:icon="@drawable/freeicon"
+
+
+    <item android:id="@+id/global"
+        android:title="Lat/Long"
+        android:icon="@drawable/global"
+        android:orderInCategory="6"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home"
+        android:orderInCategory="5"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/list"
+        android:title="List"
+        android:icon="@drawable/list"
+        android:orderInCategory="300"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/options"
+        android:icon="@drawable/global"
+        android:title="Options"
+        app:showAsAction="never"
+        android:orderInCategory="400"/> <!-- This uses showAsAction=never, so look at title= parameter -->
+
+
+    <item android:id="@+id/mail"
+        android:icon="@drawable/mail"
         android:orderInCategory="10"
-        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+        app:showAsAction="always"
+        android:title="Contact"/>
 
-    <item android:id="@+id/nav_goweather"
-        android:title="Weather forecast"
-        android:icon="@drawable/freeicon"
-        android:orderInCategory="20"
-        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
 
-    <item android:id="@+id/nav_gologin"
-        android:title="Go back to login"
-        android:icon="@drawable/freeicon"
-        android:orderInCategory="30"
-        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
 
 
 </menu>

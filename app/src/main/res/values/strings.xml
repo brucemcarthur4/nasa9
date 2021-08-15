@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">AndroidLabs</string>
+    <string name="app_name">NASA 9</string>
+
+
     <string name="title">Look at my GUI</string>
     <string name="button">Click Here</string>
     <string name="checkbox">Check this out!</string>
@@ -9,7 +11,12 @@
     <string name="snackbar_off">The switch is now off</string>
     <string name="snackbar_on">The switch is now on</string>
     <string name="snackbar_undo">Undo</string>
-    <string name="emailTitle">Enter your email address USA.</string>
+
+    <!-- Splash Screen -->
+    <color name="backGround">#555555</color>
+    <string name="welcome">Welcome</string>
+    <string name="startButton">Begin</string>
+    <string name="appTitle">NASA 9</string>
     <string name="enterEmail">Type email here.</string>
     <string name="passwordTitle">Type your password eh.</string>
     <string name="loginButton">Login</string>

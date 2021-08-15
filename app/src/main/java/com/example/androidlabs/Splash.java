@@ -1,27 +1,62 @@
 package com.example.androidlabs;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.Switch;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
+import android.widget.ProgressBar;
 
 
-
-public class MainActivity extends AppCompatActivity {
+public class Splash extends AppCompatActivity {
 
     SharedPreferences prefs = null;
+
+
+
+        private ProgressBar mProgress;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            // Show the splash screen
+            setContentView(R.layout.activity_splash);
+            mProgress = (ProgressBar) findViewById(R.id.splash_screen_progress_bar);
+
+            // Start lengthy operation in a background thread
+            new Thread(new Runnable() {
+                public void run() {
+                    doWork();
+                    startApp();
+                  //  finish();
+                }
+            }).start();
+        }
+
+        // Use this are to downlad image of the day maybe or any other pre work i need
+        private void doWork() {
+            for (int progress=0; progress<100; progress+=20) {
+                try {
+                    Thread.sleep(1000);
+                    mProgress.setProgress(progress);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    private void startApp() {
+        Intent nextPage = new Intent(this, LatLong.class);
+        startActivity(nextPage);
+      //  Button loginbutton = findViewById(R.id.loginButton);
+      //  loginbutton.setOnClickListener( click -> startActivity( nextPage ));
+    }
+
+
+    }
+
+
+/*
 
 
     @Override
@@ -29,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.e("Main Activity", "In onCreate()");
       //  setContentView(R.layout.activity_main);
-        setContentView(R.layout.activity_main_login);
+        setContentView(R.layout.activity_splash);
 
         EditText myEmail = findViewById(R.id.enterEmail);
 
@@ -112,9 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+*/
 
 
-
-
-}
 
