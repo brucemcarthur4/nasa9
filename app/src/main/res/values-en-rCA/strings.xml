@@ -39,7 +39,10 @@
 
   <string name="profileClickButton">Click the button above to take a picture eh.</string>
 
-  <!-- Weather Forecast Activity -->
+  <!-- Lat Long Get Satellite image -->
+  <string name="lat_enter">Enter Latitude</string>
+  <string name="long_enter">Enter Longitude</string>
+  <string name="get_image">Get Satellite Image</string>
   <string name="weather_current_temp">Current Temperature: %1$s</string>
   <string name="weather_max_temp">Max: %1$s</string>
   <string name="weather_min_temp">Min: %1$s</string>

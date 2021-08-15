@@ -3,6 +3,7 @@ package com.example.androidlabs;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -33,21 +34,35 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.material.navigation.NavigationView;
 
 
+public class LatLong extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    // Get assets http address
+    //{
+    //     date: "2021-05-29T15:44:34.939000",
+    //            id: "LANDSAT/LC08/C01/T1_SR/LC08_015029_20210529",
+    //         resource: {
+    //     dataset: "LANDSAT/LC08/C01/T1_SR",
+    //             planet: "earth"
+    // },
+    //     service_version: "v5000",
+    //             url: "https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/thumbnails/4c5b7451697792cdf6bc8e54e7d3fc71-185486d3cc6db37f3a24221b68a1ba90:getPixels"
+    //  }
+    // new york 40.71452325335553, -74.00162703114904
+    // my house 45.433685109297066, -75.69267672422043
 
-
-public class LatLong extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-    private static final String TEMP_URL = "https://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric";
-    private static final String UV_URL = "https://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389";
-    private static final String WEATHER_ICON_URL = "https://openweathermap.org/img/w/%s";
-    private static XmlPullParser xpp;
-
+    private static final String nasaKey = "MtVwZnEidfhi46N5UapE3FadxyQREdg9bXLC7C1h";
+    // Get image http address
+    private static final String NASA_IMAGE_URL = "https://api.nasa.gov/planetary/earth/imagery?lon=-75.69&lat=45.4336&date=2021-06-01&dim=.05&api_key=" + nasaKey;
+    // Get assets http address
+    private static final String NASA_ASSETS_URL = "https://api.nasa.gov/planetary/earth/assets?lon=-75.69&lat=45.4336&date=2021-06-01&dim=.05&api_key=" + nasaKey;
 
 
     @Override
@@ -55,6 +70,12 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_latlong);
 
+
+        //  https://api.nasa.gov/planetary/earth/imagery?lon=-75.69&lat=45.4336&date=2021-06-01&dim=.05&api_key=DEMO_KEY
+
+
+        // nasa api key
+        // MtVwZnEidfhi46N5UapE3FadxyQREdg9bXLC7C1h
 /////////////////////////////////////////////////////////
 
         //For toolbar:
@@ -65,7 +86,7 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
         //For NavigationDrawer:
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                drawer, tBar,R.string.open, R.string.close);
+                drawer, tBar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -79,22 +100,122 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
         bar.setVisibility(View.VISIBLE);
         bar.setProgress(0);
 
-        // Setup the XML parser
-        try {
-            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            factory.setNamespaceAware(false);
-            xpp = factory.newPullParser();
-        } catch (Exception e) {
-            Log.e(this.getClass().getName(), e.getMessage());
-        }
+        // This is using a lambda that was covered in Module 2
+        findViewById(R.id.get_sat_button).setOnClickListener((listener) -> {
+            new ForecastQuery().execute();
+        });
 
-        new ForecastQuery().execute();
+
     }
 
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private class ForecastQuery extends AsyncTask<String, Integer, String> {
+        String currentTemp, minTemp, maxTemp, icon,date = null;
+        double uvRating;
+        Bitmap satImage;
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            // Setup everything on the activity
+             ((TextView) findViewById(R.id.current_temp)).setText(getString(R.string.weather_current_temp, currentTemp));
+            // ((TextView) findViewById(R.id.max_temp)).setText(getString(R.string.weather_max_temp, maxTemp));
+            // ((TextView) findViewById(R.id.min_temp)).setText(getString(R.string.weather_min_temp, minTemp));
+            // ((TextView) findViewById(R.id.uv_rating)).setText(getString(R.string.weather_uv_index, String.valueOf(uvRating)));
+            ((ImageView) findViewById(R.id.sat_image)).setImageBitmap(satImage);
+
+            // Hide the progress bar
+            ((ProgressBar) findViewById(R.id.progress_bar)).setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            ((ProgressBar) findViewById(R.id.progress_bar)).setProgress(values[0]);
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            InputStream response = null;
+            InputStream is = null;
+
+
+            try {
+
+                response = new URL(NASA_ASSETS_URL).openConnection().getInputStream();
+                // InputStream response = NASA_URL.getInputStream();
+
+                // json is UTF-8 by default
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                    Log.i(this.getClass().getName(), "sb = " + line + "\n");
+                }
+                String result = sb.toString();
+
+
+
+
+                Log.i(this.getClass().getName(), "JSON String = " + result);
+
+                // convert string to json
+                JSONObject nasadate = new JSONObject(result);
+
+                currentTemp = nasadate.getString("slogan");
+
+
+
+                // Get Image
+
+                is = new URL(String.format(NASA_IMAGE_URL)).openConnection().getInputStream();
+                satImage = BitmapFactory.decodeStream(is);
+
+
+/*
+                // Download the weather image if we don't already have it.
+                Log.i(this.getClass().getName(), "Looking for " + icon);
+                if (!fileExists(icon)) {
+                    Log.i(this.getClass().getName(), "Downloading " + icon);
+                    is = new URL(String.format(WEATHER_ICON_URL, icon)).openConnection().getInputStream();
+                    satImage = BitmapFactory.decodeStream(is);
+
+                    // Save it, using a try-with-resources will automatically close and flush
+                    try (FileOutputStream fos = openFileOutput(icon, Context.MODE_PRIVATE)) {
+                        satImage.compress(Bitmap.CompressFormat.PNG, 80, fos);
+                    }
+                } else {
+                    Log.i(this.getClass().getName(), icon + " already exists");
+
+                    // Load it from disk
+                    try (FileInputStream fis = openFileInput(icon)) {
+                        satImage = BitmapFactory.decodeStream(fis);
+                    }
+                }
+*/
+                publishProgress(100);
+
+
+            } catch (Exception e) {
+                Log.e(this.getClass().getName(), e.getMessage());
+            }
+            return null;
+        }
+
+        public boolean fileExists(String fname) {
+            return getBaseContext().getFileStreamPath(fname).exists();
+        }
+    }
+
+
+    /*
     private class ForecastQuery extends AsyncTask<String, Integer, String> {
         String currentTemp, minTemp, maxTemp, icon = null;
         double uvRating;
-        Bitmap weatherIcon;
+        Bitmap satImage;
 
         @Override
         protected void onPostExecute(String s) {
@@ -104,7 +225,7 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
             ((TextView) findViewById(R.id.max_temp)).setText(getString(R.string.weather_max_temp, maxTemp));
             ((TextView) findViewById(R.id.min_temp)).setText(getString(R.string.weather_min_temp, minTemp));
             ((TextView) findViewById(R.id.uv_rating)).setText(getString(R.string.weather_uv_index, String.valueOf(uvRating)));
-            ((ImageView) findViewById(R.id.weather_icon)).setImageBitmap(weatherIcon);
+            ((ImageView) findViewById(R.id.weather_icon)).setImageBitmap(satImage);
 
             // Hide the progress bar
             ((ProgressBar) findViewById(R.id.progress_bar)).setVisibility(View.INVISIBLE);
@@ -157,18 +278,18 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
                 if (!fileExists(icon)) {
                     Log.i(this.getClass().getName(), "Downloading " + icon);
                     is = new URL(String.format(WEATHER_ICON_URL, icon)).openConnection().getInputStream();
-                    weatherIcon = BitmapFactory.decodeStream(is);
+                    satImage = BitmapFactory.decodeStream(is);
 
                     // Save it, using a try-with-resources will automatically close and flush
                     try (FileOutputStream fos = openFileOutput(icon, Context.MODE_PRIVATE)) {
-                        weatherIcon.compress(Bitmap.CompressFormat.PNG, 80, fos);
+                        satImage.compress(Bitmap.CompressFormat.PNG, 80, fos);
                     }
                 } else {
                     Log.i(this.getClass().getName(), icon + " already exists");
 
                     // Load it from disk
                     try (FileInputStream fis = openFileInput(icon)) {
-                        weatherIcon = BitmapFactory.decodeStream(fis);
+                        satImage = BitmapFactory.decodeStream(fis);
                     }
                 }
                 publishProgress(100);
@@ -183,6 +304,7 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
+*/
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -215,8 +337,7 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
-        switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
             //what to do when the menu item is selected:
             case R.id.home:
                 message = "You clicked Home";
@@ -241,12 +362,11 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
 
     // Needed for the OnNavigationItemSelected interface:
     @Override
-    public boolean onNavigationItemSelected( MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
 
         String message = null;
 
-        switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.list:
                 //   message = "You clicked chatroom";
                 // Go to Chat section
@@ -268,8 +388,8 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.mail:
                 //   message = "You clicked on the weather";
                 // Go to Chat section
-              //  Intent intent4 = new Intent(this, Mail.class);
-              //  startActivity(intent4);
+                //  Intent intent4 = new Intent(this, Mail.class);
+                //  startActivity(intent4);
                 break;
             case R.id.options:
                 //   message = "You clicked on go login";
@@ -287,10 +407,6 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
         // Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_LONG).show();
         return false;
     }
-
-
-
-
 
 
 }
