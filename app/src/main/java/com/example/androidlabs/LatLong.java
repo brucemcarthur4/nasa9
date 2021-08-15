@@ -112,22 +112,24 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private class ForecastQuery extends AsyncTask<String, Integer, String> {
-        String currentTemp, minTemp, maxTemp, icon,date = null;
+        String imageLat, imageLong,imageDate = null;
         double uvRating;
         Bitmap satImage;
+
+        // Show the progress bar
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             // Setup everything on the activity
-             ((TextView) findViewById(R.id.current_temp)).setText(getString(R.string.weather_current_temp, currentTemp));
-            // ((TextView) findViewById(R.id.max_temp)).setText(getString(R.string.weather_max_temp, maxTemp));
-            // ((TextView) findViewById(R.id.min_temp)).setText(getString(R.string.weather_min_temp, minTemp));
-            // ((TextView) findViewById(R.id.uv_rating)).setText(getString(R.string.weather_uv_index, String.valueOf(uvRating)));
-            ((ImageView) findViewById(R.id.sat_image)).setImageBitmap(satImage);
+             ((TextView) findViewById(R.id.image_date)).setText(getString(R.string.image_date, imageDate));
+            ((TextView) findViewById(R.id.image_lat)).setText(getString(R.string.image_lat, imageLat));
+            ((TextView) findViewById(R.id.image_long)).setText(getString(R.string.image_long, imageLong));
+
+          //  ((ImageView) findViewById(R.id.sat_image)).setImageBitmap(satImage);
 
             // Hide the progress bar
-            ((ProgressBar) findViewById(R.id.progress_bar)).setVisibility(View.INVISIBLE);
+         //   ((ProgressBar) findViewById(R.id.progress_bar)).setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -158,14 +160,12 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
                 String result = sb.toString();
 
 
-
-
                 Log.i(this.getClass().getName(), "JSON String = " + result);
 
                 // convert string to json
                 JSONObject nasadate = new JSONObject(result);
 
-                currentTemp = nasadate.getString("slogan");
+                imageDate = nasadate.getString("date");
 
 
 
