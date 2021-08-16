@@ -18,7 +18,7 @@
 
         <activity android:name=".Home"/>
         <activity android:name=".Mail"/>
-        <activity android:name=".TestToolbar"/>
+      <!--  <activity android:name=".TestToolbar"/>  -->
         <activity android:name=".EmptyActivity" />
         <activity android:name=".LatLong" />
         <activity android:name=".ChatRoomActivity" />

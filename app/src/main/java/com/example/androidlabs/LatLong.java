@@ -1,6 +1,8 @@
 package com.example.androidlabs;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -49,6 +53,16 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_latlong);
 
+     //   NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+      //  View header = navigationView.getHeaderView(0);
+      //  TextView name = header.findViewById(R.id.name_text_view);
+      //  TextView email = header.findViewById(R.id.email_text_view);
+      //  TextView contact = header.findViewById(R.id.contact_text_view);
+
+      //  name.setText(myname);
+      //  email.setText(myemail);
+     //   contact.setText(mycontact);
+
         // **********************************************************************
         // Toolbar code
         Toolbar tBar = findViewById(R.id.toolbar);
@@ -64,6 +78,7 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
         // **********************************************************************
 
 
+
         // Start the progress bar
         ProgressBar bar = findViewById(R.id.progress_bar);
         bar.setVisibility(View.VISIBLE);
@@ -73,7 +88,9 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
         findViewById(R.id.get_sat_button).setOnClickListener((listener) -> {
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.searching), Toast.LENGTH_SHORT).show();
            //  bar.setVisibility(View.VISIBLE);
-
+            ((TextView) findViewById(R.id.image_date)).setText("");
+            ((TextView) findViewById(R.id.image_lat)).setText("");
+            ((TextView) findViewById(R.id.image_long)).setText("");
             bar.setProgress(0);
 
             new NasaQuery().execute();
@@ -118,7 +135,7 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
             InputStream response = null;
             InputStream is = null;
             EditText mEdit;
-            theDate = "2014-02-01";
+            theDate = "2021-04-01";
 
             // Get lat from inpout field
             mEdit   = (EditText)findViewById(R.id.lat_enter);
@@ -175,12 +192,12 @@ if (imageLat.isEmpty() || imageLong.isEmpty()) {
                 imageDate = nasadate.getString("date");
 
 
-
                 // Get Image
+               is = new URL(String.format(NASA_IMAGE_URL)).openConnection().getInputStream();
+              satImage = BitmapFactory.decodeStream(is);
 
-              //  is = new URL(String.format(NASA_IMAGE_URL)).openConnection().getInputStream();
-             //   satImage = BitmapFactory.decodeStream(is);
-
+                ImageView simage = (ImageView)findViewById(R.id.sat_image);
+                simage.setImageBitmap(satImage);
 
 /*
                 // Download the weather image if we don't already have it.
@@ -251,6 +268,19 @@ if (imageLat.isEmpty() || imageLong.isEmpty()) {
                 Intent intent4 = new Intent(this, Mail.class);
                 startActivity(intent4);
                 break;
+
+            case R.id.help:
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("A title").setMessage("My message")
+                        .setPositiveButton("Ok", (click, arg) -> { })
+                       // .setNegativeButton("No", (click, arg) -> { })
+                       // .setNeutralButton("Maybe", (click, arg) -> { })
+                        .create().show();
+
+                break;
+
+
             case R.id.options:
                 Intent intent5 = new Intent();
                 intent5.putExtra("data2", "500");
@@ -271,6 +301,7 @@ if (imageLat.isEmpty() || imageLong.isEmpty()) {
             case R.id.list:
                 Intent intent1 = new Intent(this, ChatRoomActivity.class);
                 startActivity(intent1);
+
                 break;
             case R.id.global:
                 Intent intent2 = new Intent(this, LatLong.class);
