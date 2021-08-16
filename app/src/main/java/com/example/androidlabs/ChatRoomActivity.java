@@ -1,32 +1,35 @@
 package com.example.androidlabs;
 
-import java.io.*;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Button;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-//import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ChatRoomActivity extends AppCompatActivity {
+public class ChatRoomActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     // private ArrayList<String> elements = new ArrayList<>( Arrays.asList( "one", "Two"/*Empty*/ ) );
 
     ArrayList<Message> elements = new ArrayList<Message>();
@@ -50,6 +53,22 @@ public class ChatRoomActivity extends AppCompatActivity {
         Button sendButton = (Button) findViewById(R.id.button_send);
         Button recieveButton = (Button) findViewById(R.id.button_receive);
         ListView theList = findViewById(R.id.theListView);
+
+
+        // **********************************************************************
+        // Toolbar code
+        Toolbar tBar = findViewById(R.id.toolbar);
+        setSupportActionBar(tBar);
+        //For NavigationDrawer:
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, tBar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        // **********************************************************************
+
 
 
         //create an adapter object and send it to the listVIew
@@ -321,5 +340,88 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     }
 
-}
+// **********************************************************************
+// Toolbar code
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch (item.getItemId()) {
+            case R.id.list:
+                Intent intent1 = new Intent(this, ChatRoomActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.global:
+                Intent intent2 = new Intent(this, LatLong.class);
+                startActivity(intent2);
+                break;
+            case R.id.home:
+                Intent intent3 = new Intent(this, Home.class);
+                startActivity(intent3);
+                break;
+            case R.id.mail:
+                Intent intent4 = new Intent(this, Mail.class);
+                startActivity(intent4);
+                break;
+            case R.id.options:
+                Intent intent5 = new Intent();
+                intent5.putExtra("data2", "500");
+                setResult(RESULT_OK, intent5);
+                //  finish(); // kills app
+                break;
+        }
+        return true;
+    }
+
+    // Needed for the OnNavigationItemSelected interface:
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        String message = null;
+
+        switch (item.getItemId()) {
+            case R.id.list:
+                Intent intent1 = new Intent(this, ChatRoomActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.global:
+                Intent intent2 = new Intent(this, LatLong.class);
+                startActivity(intent2);
+                break;
+            case R.id.home:
+                Intent intent3 = new Intent(this, Home.class);
+                startActivity(intent3);
+                break;
+            case R.id.mail:
+                Intent intent4 = new Intent(this, Mail.class);
+                startActivity(intent4);
+                break;
+            case R.id.options:
+                Intent intent5 = new Intent();
+                intent5.putExtra("data2", "500");
+                setResult(RESULT_OK, intent5);
+                //  finish(); // kills app
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        // Toast.makeText(this, "NavigationDrawer: " + message, Toast.LENGTH_LONG).show();
+        return false;
+    }
+// **********************************************************************
+
+} // end class
+
+
 

@@ -15,7 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class Mail extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     SharedPreferences prefs = null;
 
@@ -26,7 +26,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Show the splash screen
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_mail);
 
 
         // **********************************************************************

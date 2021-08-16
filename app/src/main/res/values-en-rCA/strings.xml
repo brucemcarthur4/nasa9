@@ -36,10 +36,11 @@
   <string name="sendButtonText">Send eh</string>
   <string name="profile_weather_forecast_button">Weather Eh</string>
 
-
   <string name="profileClickButton">Click the button above to take a picture eh.</string>
 
+
   <!-- Lat Long Find Satellite Image Activity -->
+  <string name="latorlongempty">Please enter a Latitude and a Longitude.</string>
   <string name="searching">Searching</string>
   <string name="lat_enter">Enter Latitude</string>
   <string name="long_enter">Enter Longitude</string>

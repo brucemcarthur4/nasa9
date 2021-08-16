@@ -39,6 +39,7 @@
     <string name="profileClickButton">Click the button above to take a picture.</string>
 
     <!-- Lat Long Get Satellite Image -->
+    <string name="latorlongempty">Veuillez saisir une latitude et une longitude.</string>
     <string name="searching">recherche</string>
     <string name="get_image">obtenir une image satellite</string>
     <string name="lat_enter">entrer la latitude</string>

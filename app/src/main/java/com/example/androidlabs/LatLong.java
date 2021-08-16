@@ -1,47 +1,29 @@
 package com.example.androidlabs;
-
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-
-import androidx.appcompat.widget.Toolbar;
-
-
-import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 
 public class LatLong extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -89,9 +71,11 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
 
         // This is using a lambda that was covered in Module 2
         findViewById(R.id.get_sat_button).setOnClickListener((listener) -> {
-          //  Toast.makeText(getApplicationContext(), getResources().getString(R.string.searching), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.searching), Toast.LENGTH_SHORT).show();
+           //  bar.setVisibility(View.VISIBLE);
+
             bar.setProgress(0);
-            bar.setVisibility(View.VISIBLE);
+
             new NasaQuery().execute();
         });
 
@@ -120,7 +104,7 @@ public class LatLong extends AppCompatActivity implements NavigationView.OnNavig
 
 
             // Hide the progress bar
-            ((ProgressBar) findViewById(R.id.progress_bar)).setVisibility(View.INVISIBLE);
+           // ((ProgressBar) findViewById(R.id.progress_bar)).setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -152,7 +136,7 @@ if (imageLat.isEmpty() || imageLong.isEmpty()) {
     // Find view to pass for snackbar show if lat or long fields empty
     View view;
     view = (View) findViewById(R.id.lat_enter);
-    Snackbar.make(view, "Snackbar you must type a lat and long", 4).show();
+    Snackbar.make(view,  getResources().getString(R.string.latorlongempty), 3000).show();
 
    // finish(); // goes to splash
 
@@ -243,22 +227,6 @@ if (imageLat.isEmpty() || imageLong.isEmpty()) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_menu, menu);
-
-
-	    /* slide 15 material:
-	    MenuItem searchItem = menu.findItem(R.id.search_item);
-        SearchView sView = (SearchView)searchItem.getActionView();
-        sView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }  });
-
-	    */
-
         return true;
     }
 
@@ -267,30 +235,31 @@ if (imageLat.isEmpty() || imageLong.isEmpty()) {
         String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
         switch (item.getItemId()) {
-            //what to do when the menu item is selected:
-            case R.id.home:
-                message = "You clicked Home";
+            case R.id.list:
+                Intent intent1 = new Intent(this, ChatRoomActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.global:
-                message = "You clicked on Global";
+                Intent intent2 = new Intent(this, LatLong.class);
+                startActivity(intent2);
                 break;
-            case R.id.list:
-                message = "You clicked on List";
-                // Go to Chat section
-                Intent intent = new Intent(this, ChatRoomActivity.class);
-                startActivity(intent);
+            case R.id.home:
+                Intent intent3 = new Intent(this, Home.class);
+                startActivity(intent3);
                 break;
             case R.id.mail:
-                message = "You clicked on mail";
+                Intent intent4 = new Intent(this, Mail.class);
+                startActivity(intent4);
                 break;
-            case R.id.help:
-                message = "You clicked on help";
+            case R.id.options:
+                Intent intent5 = new Intent();
+                intent5.putExtra("data2", "500");
+                setResult(RESULT_OK, intent5);
+                //  finish(); // kills app
                 break;
         }
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         return true;
     }
-
 
     // Needed for the OnNavigationItemSelected interface:
     @Override
@@ -300,40 +269,26 @@ if (imageLat.isEmpty() || imageLong.isEmpty()) {
 
         switch (item.getItemId()) {
             case R.id.list:
-                //   message = "You clicked chatroom";
-                // Go to Chat section
-                Intent intent = new Intent(this, ChatRoomActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(this, ChatRoomActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.global:
-                //   message = "You clicked on the weather";
-                // Go to Chat section
                 Intent intent2 = new Intent(this, LatLong.class);
                 startActivity(intent2);
                 break;
             case R.id.home:
-                //   message = "You clicked on the weather";
-                // Go to Chat section
                 Intent intent3 = new Intent(this, Home.class);
                 startActivity(intent3);
                 break;
             case R.id.mail:
-                //   message = "You clicked on the weather";
-                // Go to Chat section
-                //  Intent intent4 = new Intent(this, Mail.class);
-                //  startActivity(intent4);
-                break;
-            case R.id.help:
-                //  Intent intent6 = new Intent(this, Help.class);
-                //  startActivity(intent6);
+                  Intent intent4 = new Intent(this, Mail.class);
+                  startActivity(intent4);
                 break;
             case R.id.options:
-                //   message = "You clicked on go login";
                 Intent intent5 = new Intent();
                 intent5.putExtra("data2", "500");
                 setResult(RESULT_OK, intent5);
-                //  finish();
-                //  finish();
+                //  finish(); // kills app
                 break;
         }
 
