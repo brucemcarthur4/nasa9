@@ -16,18 +16,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidLabs">
 
-        <activity android:name=".TestToolbar"></activity>
+        <activity android:name=".Home"/>
+        <activity android:name=".TestToolbar"/>
         <activity android:name=".EmptyActivity" />
-        <activity android:name=".WeatherForecast" />
+        <activity android:name=".LatLong" />
         <activity android:name=".ChatRoomActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainActivity">
+     <!--   <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        -->
+
+        <activity
+            android:name=".Splash"
+         android:screenOrientation="portrait">
+        <!--    android:theme="@style/AppTheme.NoActionBar"> -->
+         <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+         </intent-filter>
+     </activity>
+
+ </application>
 
 </manifest>

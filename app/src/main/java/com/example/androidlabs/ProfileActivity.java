@@ -4,22 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioGroup;
-import android.widget.Switch;
-import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -58,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // When the 'Go to Weather Forecast' button is clicked, launch the forecast activity
         ((Button) findViewById(R.id.weather_forecast_button)).setOnClickListener(clk -> {
-            startActivity(new Intent(this, WeatherForecast.class));
+            startActivity(new Intent(this, LatLong.class));
         });
 
         }
