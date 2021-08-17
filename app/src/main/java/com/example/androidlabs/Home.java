@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -62,9 +63,24 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         //Look at your menu XML file. Put a case for every id in that file:
         switch (item.getItemId()) {
             case R.id.list:
-                Intent intent1 = new Intent(this, ChatRoomActivity.class);
+                Intent intent1 = new Intent(this, ImageList.class);
                 startActivity(intent1);
                 break;
+
+            case R.id.help:
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle(getResources().getString(R.string.alert_home_title)).setMessage(getResources().getString(R.string.alert_home))
+                        .setPositiveButton("Ok", (click, arg) -> {
+                        })
+                        // .setNegativeButton("No", (click, arg) -> { })
+                        // .setNeutralButton("Maybe", (click, arg) -> { })
+                        .create().show();
+
+                break;
+
+
+
             case R.id.global:
                 Intent intent2 = new Intent(this, LatLong.class);
                 startActivity(intent2);
@@ -95,7 +111,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         switch (item.getItemId()) {
             case R.id.list:
-                Intent intent1 = new Intent(this, ChatRoomActivity.class);
+                Intent intent1 = new Intent(this, ImageList.class);
                 startActivity(intent1);
                 break;
             case R.id.global:

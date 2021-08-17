@@ -22,6 +22,30 @@
     <string name="loginButton">Login</string>
     <string name="enterEmailHint">Type email here</string>
 
+    <!-- Home-->
+    <string name="home_title">HOME</string>
+    <string name="home_text">"News: "NASA 9 1.0 publié"</string>
+
+    <string name="alert_imagelist_title">Collection d\'images</string>
+    <string name="alert_imagelist">Ceci est une collection de vos images enregistrées</string>
+
+    <string name="alert_home_title">NASA 9 Nouvelles</string>
+    <string name="alert_home">Vérifiez ici souvent pour les dernières nouvelles!</string>
+
+    <string name="alert_mail_title">Coordonnées</string>
+    <string name="alert_mail">Retrouvez les coordonnées dans cette rubrique.</string>
+
+
+    <!-- Mail-->
+    <string name="mail_title">MAIL</string>
+    <string name="mail_text">"Email: "mcar0057@algonquinlive.com"</string>
+
+
+    <!-- Alerts-->
+    <string name="alert_latlong_title">Get Satellite Image</string>
+    <string name="alert_latlong">Type in a latitude and logitutde then click GET SATELLITE IMAGE, you can also save an image to your favorites list!</string>
+
+
     <string name="profileProfile">Your profile.</string>
     <string name="profileYourName">Your Name.</string>
     <string name="profileEnterName">Enter your name here.</string>
@@ -39,6 +63,7 @@
     <string name="profileClickButton">Click the button above to take a picture.</string>
 
     <!-- Lat Long Get Satellite Image -->
+    <string name="submit_button">Enregistrer l\'image</string>
     <string name="latorlongempty">Veuillez saisir une latitude et une longitude.</string>
     <string name="searching">recherche</string>
     <string name="get_image">obtenir une image satellite</string>

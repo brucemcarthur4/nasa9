@@ -18,29 +18,20 @@
 
         <activity android:name=".Home"/>
         <activity android:name=".Mail"/>
-      <!--  <activity android:name=".TestToolbar"/>  -->
         <activity android:name=".EmptyActivity" />
         <activity android:name=".LatLong" />
-        <activity android:name=".ChatRoomActivity" />
-        <activity android:name=".ProfileActivity" />
-     <!--   <activity android:name=".Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ImageList" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        -->
+
 
         <activity
             android:name=".Splash"
          android:screenOrientation="portrait">
-        <!--    android:theme="@style/AppTheme.NoActionBar"> -->
          <intent-filter>
              <action android:name="android.intent.action.MAIN" />
              <category android:name="android.intent.category.LAUNCHER" />
          </intent-filter>
-     </activity>
+         </activity>
 
  </application>
 

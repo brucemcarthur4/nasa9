@@ -100,7 +100,7 @@ public class TestToolbar extends AppCompatActivity implements NavigationView.OnN
             case R.id.list:
              //   message = "You clicked chatroom";
                 // Go to Chat section
-                Intent intent = new Intent(TestToolbar.this, ChatRoomActivity.class);
+                Intent intent = new Intent(TestToolbar.this, ImageList.class);
                 startActivity(intent);
                 break;
             case R.id.global:

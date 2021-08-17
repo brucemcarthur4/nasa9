@@ -24,6 +24,9 @@ public class MyOpener extends SQLiteOpenHelper {
     public final static String COL_TYPE = "TYPE";
     public final static String COL_MESSAGE = "MESSAGE";
 
+    public final static String COL_LAT = "LAT"; //****
+    public final static String COL_LONG = "LONG"; //****
+
 
     public MyOpener(Context ctx)
     {
@@ -37,8 +40,7 @@ public class MyOpener extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COL_TYPE + " text,"
-                + COL_MESSAGE  + " text);");  // add or remove columns
+                + COL_TYPE + " text,"+ COL_MESSAGE + " text,"+ COL_LAT + " text,"+ COL_LONG  + " text);");  // add or remove columns
     }
 
 

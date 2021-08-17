@@ -29,7 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ChatRoomActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ImageList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     // private ArrayList<String> elements = new ArrayList<>( Arrays.asList( "one", "Two"/*Empty*/ ) );
 
     ArrayList<Message> elements = new ArrayList<Message>();
@@ -46,12 +46,12 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_room);
+        setContentView(R.layout.activity_image_list);
 
         //Get the fields from the screen:
-        EditText themessage = findViewById(R.id.message);
-        Button sendButton = (Button) findViewById(R.id.button_send);
-        Button recieveButton = (Button) findViewById(R.id.button_receive);
+      //  EditText themessage = findViewById(R.id.message);
+      //  Button sendButton = (Button) findViewById(R.id.button_send);
+      //  Button recieveButton = (Button) findViewById(R.id.button_receive);
         ListView theList = findViewById(R.id.theListView);
 
 
@@ -82,15 +82,15 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
 
 
         // onClick Send Button
-        sendButton.setOnClickListener((listener) -> {
-            Log.e("button", " clicked send");
-            doMessage("s");
-        });
+       // sendButton.setOnClickListener((listener) -> {
+       //     Log.e("button", " clicked send");
+       //     doMessage("s");
+      //  });
         // onClick Receive Button
-        recieveButton.setOnClickListener((listener) -> {
-            Log.e("button", " clicked receive");
-            doMessage("r");
-        });
+      //  recieveButton.setOnClickListener((listener) -> {
+       //     Log.e("button", " clicked receive");
+      //      doMessage("r");
+      //  });
 
 
         //This listens for items being clicked in the list view
@@ -124,7 +124,7 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
                         .commit(); //actually load the fragment.
             } else //isPhone
             {
-                Intent nextActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);
+                Intent nextActivity = new Intent(ImageList.this, EmptyActivity.class);
                 nextActivity.putExtras(dataToPass); //send data to next activity
                 startActivity(nextActivity); //make the transition
             }
@@ -133,6 +133,7 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
 
     }
 
+    /*
     private void doMessage(String messagetype) {
 
         // Get text from Input
@@ -173,7 +174,7 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
         //Show the id of the inserted item:
         Toast.makeText(this, "Inserted item id:" + newId, Toast.LENGTH_LONG).show();
     }
-
+*/
 
     private void loadDataFromDatabase() {
         //get a database connection:
@@ -182,7 +183,7 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
 
 
         // We want to get all of the columns. Look at MyOpener.java for the definitions:
-        String[] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_TYPE};
+        String[] columns = {MyOpener.COL_ID, MyOpener.COL_MESSAGE, MyOpener.COL_TYPE, MyOpener.COL_LAT, MyOpener.COL_LONG};
         //query all the results from the database:
         Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
 
@@ -192,15 +193,19 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
         int messageColumnIndex = results.getColumnIndex(MyOpener.COL_MESSAGE);
         int typeColIndex = results.getColumnIndex(MyOpener.COL_TYPE);
         int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
+        int latIndex = results.getColumnIndex(MyOpener.COL_LAT);
+        int longIndex = results.getColumnIndex(MyOpener.COL_LONG);
 
         //iterate over the results, return true if there is a next item:
         while (results.moveToNext()) {
             String type = results.getString(typeColIndex);
             String message = results.getString(messageColumnIndex);
             long id = results.getLong(idColIndex);
+            String lat = results.getString(latIndex);
+            String long2 = results.getString(longIndex);
 
             //add the new Message to the array list:
-            elements.add(new Message(type, message, id));
+            elements.add(new Message(type, message,id));
         }
 
 
@@ -268,6 +273,8 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
         ContentValues updatedValues = new ContentValues();
         updatedValues.put(MyOpener.COL_TYPE, c.getType());
         updatedValues.put(MyOpener.COL_MESSAGE, c.getMessage());
+        updatedValues.put(MyOpener.COL_LAT, c.getMessage());
+        updatedValues.put(MyOpener.COL_LONG, c.getMessage());
 
         //now call the update function:
         db.update(MyOpener.TABLE_NAME, updatedValues, MyOpener.COL_ID + "= ?", new String[]{Long.toString(c.getId())});
@@ -357,9 +364,22 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
         //Look at your menu XML file. Put a case for every id in that file:
         switch (item.getItemId()) {
             case R.id.list:
-                Intent intent1 = new Intent(this, ChatRoomActivity.class);
+                Intent intent1 = new Intent(this, ImageList.class);
                 startActivity(intent1);
                 break;
+
+            case R.id.help:
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle(getResources().getString(R.string.alert_imagelist_title)).setMessage(getResources().getString(R.string.alert_imagelist))
+                        .setPositiveButton("Ok", (click, arg) -> {
+                        })
+                        // .setNegativeButton("No", (click, arg) -> { })
+                        // .setNeutralButton("Maybe", (click, arg) -> { })
+                        .create().show();
+
+                break;
+
             case R.id.global:
                 Intent intent2 = new Intent(this, LatLong.class);
                 startActivity(intent2);
@@ -390,7 +410,7 @@ public class ChatRoomActivity extends AppCompatActivity implements NavigationVie
 
         switch (item.getItemId()) {
             case R.id.list:
-                Intent intent1 = new Intent(this, ChatRoomActivity.class);
+                Intent intent1 = new Intent(this, ImageList.class);
                 startActivity(intent1);
                 break;
             case R.id.global:

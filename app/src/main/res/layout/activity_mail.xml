@@ -7,6 +7,35 @@
 
     <include layout="@layout/activity_test_toolbar"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="80dp"
+        android:orientation="vertical"
+        >
+
+
+        <TextView
+
+            android:id="@+id/mail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mail_title"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/mail_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mail_text"
+            android:textSize="26dp" />
+
+    </LinearLayout>
+
+
 
 
 

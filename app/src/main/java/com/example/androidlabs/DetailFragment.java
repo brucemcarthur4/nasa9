@@ -32,21 +32,21 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         dataFromActivity = getArguments();
-        id = dataFromActivity.getLong(ChatRoomActivity.ITEM_ID );
+        id = dataFromActivity.getLong(ImageList.ITEM_ID );
 
         // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.fragment_detail, container, false);
 
         //show the message
         TextView message = (TextView)result.findViewById(R.id.message);
-        message.setText(dataFromActivity.getString(ChatRoomActivity.ITEM_MESSAGE));
+        message.setText(dataFromActivity.getString(ImageList.ITEM_MESSAGE));
 
         //show the id:
         TextView idView = (TextView)result.findViewById(R.id.idText);
         idView.setText("ID=" + id);
 
         //Tick checkbox if sent message
-        String messageType = dataFromActivity.getString(ChatRoomActivity.ITEM_TYPE );
+        String messageType = dataFromActivity.getString(ImageList.ITEM_TYPE );
         CheckBox simpleCheckBox = (CheckBox)result.findViewById(R.id.checkbox_sent);
 
         Log.i("checktype", "Type = " + messageType);

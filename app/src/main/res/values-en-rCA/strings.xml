@@ -10,6 +10,30 @@
       <string name="snackbar_on">The switch is now on</string>
       <string name="snackbar_undo">Undo</string>
 
+  <!-- Mail-->
+  <string name="mail_title">MAIL</string>
+  <string name="mail_text">"Email: "mcar0057@algonquinlive.com"</string>
+
+
+  <!-- Home-->
+  <string name="home_title">HOME</string>
+  <string name="home_text">"News: "NASA 9 1.0 released"</string>
+
+  <!-- Alerts-->
+
+  <string name="alert_latlong_title">Get Satellite Image</string>
+  <string name="alert_latlong">Type in a latitude and logitutde then click GET SATELLITE IMAGE, you can also save an image to your favorites list!</string>
+
+  <string name="alert_imagelist_title">Image Collection</string>
+  <string name="alert_imagelist">This is a collection of your saved images</string>
+
+  <string name="alert_home_title">NASA 9 News</string>
+  <string name="alert_home">Check here often for recent news!</string>
+
+  <string name="alert_mail_title">Contact Information</string>
+  <string name="alert_mail">Find contact information in this section.</string>
+
+
   <!-- Splash Screen -->
   <color name="backGround">#555555</color>
   <string name="welcome">Bienvenue</string>
@@ -35,11 +59,11 @@
   <string name="receiveButtonText">Receive eh</string>
   <string name="sendButtonText">Send eh</string>
   <string name="profile_weather_forecast_button">Weather Eh</string>
-
   <string name="profileClickButton">Click the button above to take a picture eh.</string>
 
 
   <!-- Lat Long Find Satellite Image Activity -->
+  <string name="submit_button">Save Image</string>
   <string name="latorlongempty">Please enter a Latitude and a Longitude.</string>
   <string name="searching">Searching</string>
   <string name="lat_enter">Enter Latitude</string>
